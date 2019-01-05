@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body{
+	background-color: #f1f1f1;
+	font-family: 'Montserrat', sans-serif;/*para que pueda aplicarse a todo el contenido*/
+	font-weight:400; 
+}
+p{
+	text-align: justify;
+}
+#banner{
+	background:url(../img/page-background.jpg);
+	padding top: 250px;
+	padding-bottom: 250px;
+	background-size: cover; /*para que pueda adaptarse a la pantalla*/
+}
+.contenido{
+	margin:30px 0 30px 0;/*arriba izquierda abajo otro costado*/
+	padding: 15px;
+}
+.contenido .container{
+	background-color: white;
+	padding: 10px;
+}
+#cursos-destacados .mes-curso{
+	color:lightgreen;
+	font-size: 16px;
+	font-weight: 600;
+}
+#cursos-destacados .precio-curso{
+	color:orange;
+	font-size: 16px;
+	font-weight: 600;
+}
+.foot{
+	background-color: black;
+	text-align: center;
+	padding: 40px;
+}
+.foot p{
+	color:#fff;
+	text-align: center;
+}
+.foot p a{
+	text-decoration: none;
+	color:#339bb8;
+}
+#banner-medio{
+	min-height:350px; /*alto minimo*/
+	background: url('../img/blog-post-background.jpg');
+	text-align: center;
+	background-attachment: fixed;/*dejar el fondo fijo*/
+	background-repeat:no-repeat;
+}
+.info-banner-medio{
+	padding-top: 150px;
+	text-transform: uppercase;
+}
+hr{
+	border-top: 4px solid #339bb8;
+	width:250px;
+}
+.titulo-seccion{
+	text-transform: uppercase;
+}
+#menu-principal{
+	background-color: black;
+}
+#menu-principal ul{
+	list-style-type: none;
+	float: right;/*para que el menu flote hacia la derecha*/
+	padding: 0;
+	margin:0;
+
+}
+#menu-principal ul li{
+	display: inline-block;/*para posicionar uno al lado de otro sin que abarque todo*/
+}
+#menu-principal ul li a{
+	padding: 30px;/*para que puede adaparse al tamaño*/
+	display: block;
+	text-decoration: none;
+	font-weight: 700;
+	color:white;
+}
+#menu-principal ul li a:hover{
+	background-color:#339bb8;
+}
+/*Inicio pagina cursos*/
+.main-header{
+background-color: #339bb8;
+text-align: center;
+padding: 30px;
+}
+.main-header h1{
+	color: white;
+	font-size: 45px;
+	text-transform: uppercase;
+
+}
+.main-header h2{
+	color: white;
+	font-size:21px;
+}
+
+.form-control{
+	margin-bottom: 10px;/*margen hacia abajo de 10px*/
+	border:1px solid #c1c1c1;
+	border-radius: 3px;
+}
