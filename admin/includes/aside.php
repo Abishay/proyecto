@@ -32,9 +32,10 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="active"><a href="index.php"><i class="fa fa-link"></i> <span>Inicio</span></a></li>
+        <li><a href="cursos.php"><i class="fa fa-link"></i> <span>Cursos</span></a></li>
+        <li><a href="mensajes.php"><i class="fa fa-link"></i> <span>Mensajes</span></a></li>
+        <li><a href="usuarios.php"><i class="fa fa-link"></i> <span>Usuarios</span></a></li>
         
       </ul>
       <!-- /.sidebar-menu -->

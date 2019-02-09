@@ -69,6 +69,19 @@ desired effect
 
   <!-- Main Header -->
   <?php include 'includes/header.php'; ?>
+
+
+  <?php
+     
+      $sql="SELECT * FROM mensajes ORDER BY id DESC";//hacer la consulta
+      $query=$connection->prepare($sql);//preparar
+      $query->execute();//ejecutar
+      $result=$query->fetchAll();//me duvuelve un array con los usuarios encontrados, el resultado de $sql="SELECT * FROM usuarios
+      //print_r($result);
+
+
+  ?>
+
   <!-- Left side column. contains the logo and sidebar -->
   <?php include 'includes/aside.php'; ?>
 
@@ -77,8 +90,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Lista de Mensajes <a href="#" class="disabled btn btn-success">+ Agregar</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -89,9 +101,51 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+      <!--LISTADO DE DATOS-->
+          <div class="col-sm-12"><!--para que me agarre toda la pantalla-->
+            <div class="box box-default">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    
+                    <th>NOMBRE</th>
+                    <th>EMAIL</th>
+                    <th>ASUNTO</th>
+                    <th>TELEFONO</th>
+                    <th>MENSAJE</th>
+                    <th>FECHA</th>
+                    <th>ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($result as $row) {?>
+                  <tr>
+                   
+                    <td><?php echo $row['nombre']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['asunto']; ?></td>
+                    <td><?php echo $row['mensaje']; ?></td>
+                    <td><?php echo $row['mensaje']; ?></td>
+                    <td><?php echo $row['fecha']; ?></td>
+                    <td>
+                      <a href="mensajes-delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><!--para enviar por el metodo get-->Eliminar </a>
+                      <a href="mensajes-update.php?id=<?php echo $row['id']; ?>" class="disabled btn btn-primary">Editar</a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+
+
+
+
+
+      <!--FIN LISTADO DE DATOS-->
+
 
     </section>
     <!-- /.content -->

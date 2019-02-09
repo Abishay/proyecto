@@ -69,6 +69,18 @@ desired effect
 
   <!-- Main Header -->
   <?php include 'includes/header.php'; ?>
+
+
+  <?php
+     
+      $sql="SELECT * FROM usuarios";//hacer la consulta
+      $query=$connection->prepare($sql);//preparar
+      $query->execute();//ejecutar
+      $result=$query->fetchAll();//me duvuelve un array con los usuarios encontrados, el resultado de $sql="SELECT * FROM usuarios
+      //print_r($result);
+
+  ?>
+
   <!-- Left side column. contains the logo and sidebar -->
   <?php include 'includes/aside.php'; ?>
 
@@ -77,8 +89,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Lista de Usuarios <a href="usuarios-add-php" class="btn btn-success">+ Agregar</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -89,9 +100,47 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+      <!--LISTADO DE DATOS-->
+          <div class="col-sm-12"><!--para que me agarre toda la pantalla-->
+            <div class="box box-default">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>EMAIL</th>
+                    <th>AVATAR</th>
+                    <th>PASSWORD</th>
+                     <th>ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($result as $row) {?>
+                  <tr>
+                    <td><?php echo $row['id_usuario']; ?></td>
+                    <td><?php echo $row['nombre']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['avatar']; ?></td>
+                    <td><?php echo $row['pass']; ?></td>
+                    <td>
+                      <a href="usuarios-delete.php?id=<?php echo $row['id_usuario']; ?>" class="btn btn-danger"><!--para enviar por el metodo get-->Eliminar </a>
+                      <a href="usuarios-update.php?id=<?php echo $row['id_usuario']; ?>" class="btn btn-primary">Editar</a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+
+
+
+
+
+      <!--FIN LISTADO DE DATOS-->
+
 
     </section>
     <!-- /.content -->

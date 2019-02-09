@@ -1,3 +1,4 @@
+<?php require '../conexion/conexion.php';  ?>
 <header class="main-header">
 
     <!-- Logo -->
@@ -147,13 +148,15 @@
                 </div>
                 <!-- /.row -->
               </li>
+
               <!-- Menu Footer-->
+
               <li class="user-footer">
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="salir.php" class="btn btn-default btn-flat">Cerrar Sesion</a>
                 </div>
               </li>
             </ul>
