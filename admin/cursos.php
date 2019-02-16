@@ -89,7 +89,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Cursos <a href="cursos-add-php" class="btn btn-success">+ Agregar</a>
+        Lista de Cursos <a href="curso-add.php" class="btn btn-success">+ Agregar</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

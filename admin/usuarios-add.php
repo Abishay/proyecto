@@ -70,16 +70,51 @@ desired effect
   <!-- Main Header -->
   <?php include 'includes/header.php'; ?>
 
+	<?php
+		if (isset($_POST)){
+			if (isset($_POST['Guardar']) && $_POST['Guardar']=='Guardar' && $_POST['nombre'] != '' && $_POST['email'] !='' && $_POST['password'] !=''){
 
-  <?php
-     
-      $sql="SELECT * FROM usuarios";//hacer la consulta
-      $query=$connection->prepare($sql);//preparar
-      $query->execute();//ejecutar
-      $result=$query->fetchAll();//me duvuelve un array con los usuarios encontrados, el resultado de $sql="SELECT * FROM usuarios
-      //print_r($result);
+				//Capturar los datos recibidos via POST y guardarlos en variables
 
-  ?>
+				$nombre=$_POST['nombre'];
+				$password=md5($_POST['password']);//encriptar la contraseña recibida
+				$activo=$_POST['activo'];
+				$avatar=$_POST['avatar'];
+				$email=$_POST['email'];
+
+				//guardar una consulta sql a ejecutar en una variable
+
+				$sql='INSERT INTO usuarios (nombre, email, pass, avatar, activo, fecha_add) VALUES (:nombre, :email, :password, :avatar, :activo, NOW())';//el now() es una funcion sql que guardar la fecha actual
+				//definir VARIABLE $DATA array() con los valores a guardarse para la consulta sql
+
+				$data=array(
+					//tienen que ser iguales a los parametros del insert, y los de la derecha a las variables
+					'nombre'=>$nombre,
+					'email'=>$email,
+					'password'=>$password,
+					'avatar'=>$avatar,
+					'activo'=>$activo
+				);
+				//preparar la consulta SQL
+				$query=$connection->prepare($sql);
+
+				try{
+					$query->execute($data); //ejecutamos la consulta
+					//Guardamos un mensaje de exito en una variable
+					$mensaje='<p class="alert alert-success">Registrado correctamente</p>';
+					//redireccionamos al listado de usuarios con Javascript
+					echo '<script>window.location="usuarios.php";</script>';
+
+				}	catch(Exception $e){
+					$mensaje= '<p class="alert alert-danger">'. $e . '</p>';
+
+				}
+			}
+		}
+
+
+	?>
+ 
 
   <!-- Left side column. contains the logo and sidebar -->
   <?php include 'includes/aside.php'; ?>
@@ -89,7 +124,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Usuarios <a href="usuarios-add.php" class="btn btn-success">+ Agregar</a>
+        Registro de Usuarios <a href="usuarios.php" class="btn btn-success">Lista de Usuarios</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -100,46 +135,45 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--LISTADO DE DATOS-->
+      <!--FORMULARIO-->
           <div class="col-sm-12"><!--para que me agarre toda la pantalla-->
-            <div class="box box-default">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>NOMBRE</th>
-                    <th>EMAIL</th>
-                    <th>AVATAR</th>
-                    <th>PASSWORD</th>
-                     <th>ACCIONES</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($result as $row) {?>
-                  <tr>
-                    <td><?php echo $row['id_usuario']; ?></td>
-                    <td><?php echo $row['nombre']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                    <td><?php echo $row['avatar']; ?></td>
-                    <td><?php echo $row['pass']; ?></td>
-                    <td>
-                      <a href="usuarios-delete.php?id=<?php echo $row['id_usuario']; ?>" class="btn btn-danger"><!--para enviar por el metodo get-->Eliminar </a>
-                      <a href="usuarios-update.php?id=<?php echo $row['id_usuario']; ?>" class="btn btn-primary">Editar</a>
-                    </td>
-                  </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+            <div class="panel row">
+
+            	<?php include 'includes/mensajes.php' ?>
+            	
+            	<form action="" method="POST">
+            		<div class="form-group col-md-6">
+            			<label>Nombre de Usuario</label>
+            			<input type="text" name="nombre" class="form-control" required>
+
+            			<label>Email</label>
+            			<input type="text" name="email" class="form-control" required>
+
+            			<label>Contraseña</label>
+            			<input type="text" name="password" class="form-control" required>
+
+            			<label>Activo</label>
+            			<select class="form-control" name="activo" required>
+            				<option value="1">Si</option>
+            				<option value="0">No</option>
+            			</select>
+
+            			<label>Avatar</label>
+            			<input type="text" name="avatar" class="form-control" required>
+            			<br>
+            			<input type="submit" class="btn btn-success" name="Guardar" value="Guardar">
+            		</div>
+            		
+
+            	</form>
+             
             </div>
 
 
           </div>
 
 
-
-
-
-      <!--FIN LISTADO DE DATOS-->
+      <!--FIN FORMULARIO-->
 
 
     </section>
@@ -173,3 +207,4 @@ desired effect
      user experience. -->
 </body>
 </html>
+
